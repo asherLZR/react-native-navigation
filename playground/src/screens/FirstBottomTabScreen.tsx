@@ -16,6 +16,7 @@ const {
   SHOW_TABS_BTN,
   HIDE_TABS_PUSH_BTN,
   FIRST_TAB_BAR_BUTTON,
+  TOGGLE_TEXT,
 } = testIDs;
 
 export default class FirstBottomTabScreen extends React.Component<NavigationComponentProps> {
@@ -71,6 +72,7 @@ export default class FirstBottomTabScreen extends React.Component<NavigationComp
         />
         <Button label="Push" onPress={this.push} />
         <Button label="Add border and shadow" onPress={this.modifyBottomTabs} />
+        <Button label="Set tab text" testID={TOGGLE_TEXT} onPress={this.setText} />
       </Root>
     );
   }
@@ -135,6 +137,12 @@ export default class FirstBottomTabScreen extends React.Component<NavigationComp
         bottomTabs: { visible: false },
       })
     );
+
+  setText = () => {
+    Navigation.mergeOptions(this, {
+      bottomTab: { text: 'Tab 1 New Text' },
+    });
+  };
 
   push = () => Navigation.push(this, Screens.Pushed);
 }
